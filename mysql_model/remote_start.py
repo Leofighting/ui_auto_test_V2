@@ -1,34 +1,37 @@
 # -*- coding:utf-8 -*-
 __author__ = "leo"
 
-import time
+from threading import Thread
 
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-from threading import Thread
+
+from mysql_connect.beike import beike
 
 
-def to_baidu(name, server_address):
-    print(name)
+def to_beike(name, server_address):
+    print(name, " 启动")
     driver = webdriver.Remote(
         command_executor=server_address,
         desired_capabilities=DesiredCapabilities.CHROME
     )
+    driver.maximize_window()
 
-    driver.get("https://www.baidu.com")
-    time.sleep(3)
-    driver.quit()
+    if name == "linux":
+        beike.shenzhen_start(driver)
+    if name == "windows":
+        beike.guangzhou_start(driver)
 
 
-address = {
+my_address = {
     "linux": "http://192.168.31.180:4444/wd/hub",
     "windows": "http://192.168.31.192:4444/wd/hub"
 }
 
 threads = []
 
-for name, url in address.items():
-    t = Thread(target=to_baidu, args=(name, url))
+for name, url in my_address.items():
+    t = Thread(target=to_beike, args=(name, url))
     threads.append(t)
 
 for t in threads:

@@ -7,8 +7,8 @@ import time
 import os
 import json
 
-from mysql_connect.beike.my_cookies import check_cookies, save_cookies_to_file
-from mysql_connect.beike.my_mysql import save_house_info_to_mysql
+from mysql_model.beike.my_cookies import check_cookies, save_cookies_to_file
+from mysql_model.beike.my_mysql import save_house_info_to_mysql, new_save_house_info_to_mysql
 
 
 def login(driver):
@@ -68,7 +68,8 @@ def to_rend_page(driver, name):
         result_list.append(info_element_dict)
     # 保存信息到文件中
     # save_house_info(result_list)
-    save_house_info_to_mysql(result_list)
+    # save_house_info_to_mysql(result_list)
+    new_save_house_info_to_mysql(result_list)
 
 
 def get_info_element_dict(info_element):
