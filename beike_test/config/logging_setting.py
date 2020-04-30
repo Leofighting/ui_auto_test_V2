@@ -12,7 +12,3 @@ def get_logger(name="myAutoTest"):
     logger = logging.getLogger(name)
 
     return logger
-
-
-logger_test = get_logger()
-logger_test.info("info log")
