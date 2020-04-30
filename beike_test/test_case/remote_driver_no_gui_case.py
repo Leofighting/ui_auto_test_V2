@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 __author__ = "leo"
 
-from selenium .webdriver.common.by import By
+from selenium.webdriver.common.by import By
 
 from beike_test.pages.houses_info_page import HousesInfoPage
 from beike_test.utils.browser_engine import browser_engine
@@ -9,11 +9,15 @@ from beike_test.config import logging_setting
 from beike_test.pages.houses_list_page import HousesListPage
 
 
-class Test(object):
-    driver = browser_engine.init_local_driver()
+class RemoteDriverNoGuiCase(object):
+    # driver = browser_engine.init_local_driver()
     logger = logging_setting.get_logger()
 
-    def test_save_info(self):
+    def __init__(self):
+        driver_dict = browser_engine.init_remote_driver_no_gui()
+        self.driver = driver_dict["linux"]
+
+    def save_info(self):
         self.logger.debug("开始保存房屋费用信息~~")
         houses_list_page = HousesListPage(self.driver)
         houses_list_page.get_houses_list_driver("exchange", "深圳", "租房")
@@ -33,5 +37,4 @@ class Test(object):
         self.logger.info("保存商品信息成功~")
 
 
-t = Test()
-t.test_save_info()
+RemoteDriverNoGuiCase = RemoteDriverNoGuiCase()

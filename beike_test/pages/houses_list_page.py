@@ -2,7 +2,6 @@
 __author__ = "leo"
 
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
 
 from beike_test.config import basic_config
 from beike_test.config.logging_setting import get_logger
@@ -19,8 +18,9 @@ class HousesListPage(BasePage):
     def get_houses_list_driver(self, first_list_name, second_list_name, third_list_name):
         """
         获取房屋信息列表
-        :param first_list_name: 一级菜单名字
-        :param second_list_name: 二级菜单名字
+        :param first_list_name: 第一个元素的关键字
+        :param second_list_name: 第二个元素的关键字
+        :param third_list_name: 第三个元素的关键字
         :return: 浏览器的 driver
         """
         driver = self.open()
@@ -69,6 +69,7 @@ class HousesListPage(BasePage):
         """
         self.find_element(*selector_condition).click()
 
+        # 切换句柄
         handles = self._driver.window_handles
         index_handle = self._driver.current_window_handle
         for handle in handles:
