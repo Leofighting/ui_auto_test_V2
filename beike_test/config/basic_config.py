@@ -12,3 +12,7 @@ REMOTE_DRIVER_DICT = {
     "linux": "http://192.168.31.180:4444/wd/hub",
     "windows": "http://192.168.31.192:4444/wd/hub"
 }
+
+# 用户信息
+USERNAME = "18819151992"
+PASSWORD = "1234QWER"
