@@ -45,12 +45,17 @@ class RemoteDriverCase(object):
         driver = houses_list_page.get_houses_info_page(houses_locator)
         self.logger.info("当前房屋信息的 url 地址是：{}".format(driver.current_url))
         # 保存房屋费用信息到数据库中
-        houses_info = HousesInfoPage(driver)
-        houses_info.save_product_info()
-        self.logger.info("保存商品信息成功~")
-
-        time.sleep(3)
-        driver.quit()
+        try:
+            houses_info = HousesInfoPage(driver)
+            houses_info.save_product_info()
+            self.logger.info("保存商品信息成功~")
+            return True
+        except:
+            return False
+        finally:
+            # 关闭浏览器
+            time.sleep(3)
+            driver.quit()
 
 
 def main():
@@ -64,4 +69,4 @@ def main():
         t.start()
 
 
-RemoteDriver = main()
+ThreadDriver = main()
