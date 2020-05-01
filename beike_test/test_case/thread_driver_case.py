@@ -67,6 +67,3 @@ def thread_driver():
 
     for t in threads:
         t.start()
-
-
-thread_driver()
