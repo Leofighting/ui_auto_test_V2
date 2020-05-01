@@ -23,7 +23,7 @@ class RemoteDriverCase(object):
         self.logger.debug("开始保存房屋费用信息~~")
         self.logger.info("正在使用 {} 上的 Chrome 浏览器进行测试".format(system_name))
         # 登陆
-        houses_login_page = HouseLoginPage(self.driver)
+        houses_login_page = HouseLoginPage(driver)
         houses_login_page.get_login_page(USERNAME, PASSWORD)
         # 获取筛选后的房屋列表
         houses_list_page = HousesListPage(driver)
@@ -58,7 +58,7 @@ class RemoteDriverCase(object):
             driver.quit()
 
 
-def main():
+def thread_driver():
     address = basic_config.REMOTE_DRIVER_DICT
     threads = []
     for system_name, url in address.items():
@@ -69,4 +69,4 @@ def main():
         t.start()
 
 
-ThreadDriver = main()
+thread_driver()

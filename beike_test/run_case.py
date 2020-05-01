@@ -11,7 +11,7 @@ from beike_test.test_case.local_driver_case import LocalDriver
 from beike_test.test_case.local_driver_no_gui_case import LocalDriverNoGui
 from beike_test.test_case.remote_driver_case import RemoteDriver
 from beike_test.test_case.remote_driver_no_gui_case import RemoteDriverNoGui
-from beike_test.test_case.thread_driver_case import ThreadDriver
+from beike_test.test_case import thread_driver_case
 
 
 class RunCase(unittest.TestCase):
@@ -33,8 +33,8 @@ class RunCase(unittest.TestCase):
         self.assertTrue(result)
 
     def test_thread_driver(self):
-        result = ThreadDriver
-        self.assertTrue(result)
+        result = thread_driver_case.thread_driver()
+        self.assertIsNone(result)
 
 
 if __name__ == '__main__':
@@ -44,6 +44,8 @@ if __name__ == '__main__':
     test_case_list = [RunCase("test_local_driver"), RunCase("test_local_driver_no_gui"),
                       RunCase("test_remote_driver"), RunCase("test_remote_driver_no_gui"),
                       RunCase("test_thread_driver")]
+    # 测试多线程远程自动化用例
+    # test_case_list = [RunCase("test_thread_driver")]
     # 将测试用例列表添加到容器中
     suite.addTests(test_case_list)
     # 生成测试报告：以时间戳定义报告名称
